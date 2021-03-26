@@ -15,12 +15,12 @@ Upload a file
     <main class="px-3">
         <h1>Upload your file please</h1>
         <p class="lead">
-            <form method="post" action="{{route('upload.store')}}">
+            <form method="post" action="{{route('upload.store')}}" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
-                  <label for="exampleInputEmail1" class="form-label">CSV files please</label>
-                  <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                  <div id="emailHelp" class="form-text">We love imagess</div>
+                  <label for="inputFile" class="form-label">CSV files please</label>
+                  <input type="file" class="form-control" id="inputFile" name="inputFile" aria-describedby="fileHelp">
+                  <div id="fileHelp" class="form-text">We love imagess</div>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
               </form>
