@@ -12,7 +12,7 @@ The goal is
 
 The enduser will be to able to upload csv files with some data. The file must have `|` separated values.
 
-### Usage
+## Usage
 
 Make sure you have acces to the Flickr API.
 
