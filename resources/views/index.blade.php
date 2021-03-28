@@ -11,6 +11,7 @@ Show all the data
             <h3 class="d-flex justify-content-center">All the data in tha house</h3>
         </div>
     </header>
+    <a href="{{route('upload.create')}}" class="text-warning mb-2">Upload a file</a>
     <table class="table table-responsive table-striped  table-bordered text-dark bg-white"  >
         <tr>
             <th>
@@ -47,7 +48,7 @@ Show all the data
             </tr>
             @endforeach
     </table>
-
+  
     <footer class="mt-auto text-white-50">
         <p>Cover template for <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>, by <a href="https://twitter.com/mdo" class="text-white">@mdo</a>.</p>
     </footer>
