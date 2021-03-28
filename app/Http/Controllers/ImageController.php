@@ -14,6 +14,14 @@ use Illuminate\Support\Str;
 
 class ImageController extends Controller
 {
+    //flickr API object
+    private $flickr;
+
+    public function __construct()
+    {
+        $this->flickr = new Flickr(new \JeroenG\Flickr\Api(env("APP_FLICKR_KEY")));
+    }
+
     /**
      * Display a listing of images
      *
@@ -38,9 +46,11 @@ class ImageController extends Controller
 
     public function show(CsvData $image)
     {
-
+        //retrieve photo data
+        $photo_data = $this->flickr->photoInfo($image->photo_id)->photo;
         $data = [
-            'image' => $image
+            'image'      => $image,
+            'photo_data' => json_encode($photo_data),
 
         ];
         return view('show', $data);
@@ -54,9 +64,6 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
-        $key = env("APP_FLICKR_KEY");
-
-        // dd($request->inputFile);
         if ($request->has('inputFile')) {
             $file = $this->uploadFile($request);
             if (($handle = fopen(public_path() . '/storage/' . $file, 'r')) !== FALSE) {
@@ -75,13 +82,8 @@ class ImageController extends Controller
 
                             if (is_numeric($photo_id)) { //check if the photo id is an actual id
 
-                                // Send a GET request to flickr.com
-                                $flickr = new Flickr(new \JeroenG\Flickr\Api($key));
-
-
                                 //retrieve photo data
-                                $photo_data = $flickr->photoInfo($photo_id)->photo;
-
+                                $photo_data = $this->flickr->photoInfo($photo_id)->photo;
 
                                 $content = file_get_contents($url); //get the content and write it to a filename
                                 $image_name = Str::of($title)->slug('-') . ".jpg"; // make it a slug, just in case
@@ -94,6 +96,7 @@ class ImageController extends Controller
                                     ],
                                     [
                                         'url'           => $url,
+                                        'photo_id'      => $photo_id,
                                         'views'         => $photo_data["views"],
                                         'owner'         => $photo_data["owner"]["realname"],
                                         'location'      => $photo_data["owner"]["location"],
@@ -109,6 +112,7 @@ class ImageController extends Controller
                 fclose($handle);
             }
         }
+
         return redirect()->route('home');
     }
 
