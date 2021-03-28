@@ -37,7 +37,12 @@ Show all the data
             <div class="col">
                 {{$image->date_taken}}
             </div> 
-    </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                {{$photo_data}}
+            </div>
+        </div>
        
     </main>
 
