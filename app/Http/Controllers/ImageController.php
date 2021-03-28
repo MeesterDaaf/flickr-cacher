@@ -12,7 +12,7 @@ use JeroenG\Flickr\Flickr;
 use Illuminate\Support\Str;
 
 
-class UploadController extends Controller
+class ImageController extends Controller
 {
     /**
      * Display a listing of images
