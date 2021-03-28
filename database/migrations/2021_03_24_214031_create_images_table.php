@@ -17,6 +17,7 @@ class CreateImagesTable extends Migration
             $table->id();
             $table->string('title')->unique();
             $table->string('url');
+            $table->string('photo_id');
             $table->integer('views')->nullable();
             $table->string('owner')->nullable();
             $table->string('location')->nullable();
